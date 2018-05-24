@@ -52,36 +52,40 @@
                             <h4 id="tit1">Nieuwe winkel invoeren:</h4>
                         </div>
                         <div class="col-xl-12">
-                            <form id="winkelform" method="post" action="#winkelweergave">
+                            <form id="winkelform" method="post" action="winkeltoevoegen.php">
                                 <div class="form-group">
                                     <label for="winkelinvoer">Vul aub een nieuwe winkel in</label>
-                                    <input class="form-control" type="text" placeholder="winkel" required>
+                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="winkelinvoer">Vul een afkorting in voor de winkel. <br> Vb: Albert Heijn = ah.</label>
+                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
                         </div>
-                        <div class="tit2 col-xl-12" id="winkelweergave">
-                            <?php
-                            include 'connectlocal.php';
+                    </div>
+                    <div class="weergavediv" id="winkelweergave">
+                        <?php
+                        include 'connectlocal.php';
 
-                            $sql = "SELECT winkel_id, winkel_naam FROM winkel";
-                            $result = mysqli_query($conn, $sql);
+                        $sql = "SELECT winkel_id, winkel_naam FROM winkel";
+                        $result = mysqli_query($conn, $sql);
 
-                            if (mysqli_num_rows($result) > 0) {
-                                while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<table class='table table.dark'> <th>winkel id</th> <th>winkel naam</th>";
-                                    echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td><tr>";
-                                    echo "</table>";
-                                }
-                            } else {
-                                echo "Geen resulaten gevonden";
+                        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> </tr> </thead> <tbody>";
+                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td><tr>";
+                                echo "</tbody></table>";
                             }
-                            ?>
+                        } else {
+                            echo "Geen resulaten gevonden";
+                        }
+                        ?>
 
-                        </div>
-                        <div class="emptyspace col-xl-12">
+                    </div>
+                    <div class="emptyspace">
 
-                        </div>
                     </div>
                 </div>
             </div>
