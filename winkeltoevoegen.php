@@ -2,7 +2,7 @@
 include 'connectlocal.php';
 
 $winkelid = $_POST['winkelafkortinginput'];
-$winkelnaam = $_POST['winkelnaaminput'];
+$winkelnaam = ucfirst($_POST['winkelnaaminput']);
 $sql = "INSERT INTO winkel (winkel_id, winkel_naam)
 VALUES ('$winkelid', '$winkelnaam')";
 
