@@ -29,17 +29,44 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="stad" role="tabpanel" aria-labelledby="stad-tab">
                 <div class="container">
-                    <div class="row text-center">
+                    <div class="row">
                         <div class="col-xl-12">
                             <h4 id="tit1">Nieuwe stad invoeren:</h4>
-                            <form id="stadform" method="POST" action="#stadweergave">
+                            <form id="stadform" method="POST" action="stadtoevoegen.php">
                                 <div class="form-group">
                                     <label for="stadinvoer">Vul aub een stadnaam in</label>
-                                    <input class="form-control" type="text" placeholder="stad" required>
+                                    <input name="stadnaaminput" class="form-control" type="text" placeholder="stad" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="populatieinvoer">Vul aub de populatie van de stad in</label>
+                                    <input name="stadpopinput" class="form-control" type="number" placeholder="populatie" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
                         </div>
+                    </div>
+                    <div class="weergavediv" id="stadweergave">
+
+                        <?php
+                        include 'connectlocal.php';
+
+                        $sql = "SELECT stad_id, naam, populatie FROM stad";
+                        $result = mysqli_query($conn, $sql);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while($row = mysqli_fetch_assoc($result)) {
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> </tr> </thead> <tbody>";
+                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td><tr>";
+                                echo "</tbody></table>";
+                            }
+                        } else {
+                            echo "Geen resulaten gevonden";
+                        }
+                        ?>
+
+                    </div>
+                    <div class="emptyspace">
+
                     </div>
                 </div>
             </div>
@@ -60,6 +87,7 @@
                                 <div class="form-group">
                                     <label for="winkelinvoer">Vul een afkorting in voor de winkel. <br> Vb: Albert Heijn = ah.</label>
                                     <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
+                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
