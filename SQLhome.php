@@ -1,4 +1,7 @@
-<?php include 'connectlocal.php'; ?>
+<?php 
+    include 'connectlocal.php'; 
+    include 'dropdownfunction.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,14 +130,7 @@
                                     <select name="aantalstadinput" class="form-control" required>
 
                                         <?php
-                                            $result = $conn->query("SELECT * FROM stad");
-
-                                                while ($row = $result->fetch_assoc()) {
-                                                    unset($stad_id, $stad_naam);
-                                                    $id = $row['stad_id'];
-                                                    $naam = $row['stad_naam']; 
-                                                    echo '<option value="'.$id.'">'.$naam.'</option>';  
-                                            }
+                                            dropdownmenu ("stad", "stad_id", "stad_naam");
                                         ?>
 
                                     </select>   
@@ -144,14 +140,7 @@
                                     <select name="aantalwinkelinput" class="form-control" required>
 
                                         <?php
-                                            $result = $conn->query("SELECT * FROM winkel");
-
-                                                while ($row = $result->fetch_assoc()) {
-                                                    
-                                                    $id = $row['winkel_id'];
-                                                    $naam = $row['winkel_naam']; 
-                                                    echo '<option value="'.$id.'">'.$naam.'</option>';  
-                                            }
+                                            dropdownmenu ("winkel", "winkel_id", "winkel_naam");
                                         ?>
 
                                     </select>                                    
