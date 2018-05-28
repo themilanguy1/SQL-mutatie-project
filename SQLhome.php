@@ -1,3 +1,5 @@
+<?php include 'connectlocal.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,15 +50,13 @@
                     <div class="weergavediv" id="stadweergave">
 
                         <?php
-                        include 'connectlocal.php';
-
                         $sql = "SELECT * FROM stad";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
+                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
                             
@@ -95,16 +95,15 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="winkelweergave">
-                        <?php
-                        include 'connectlocal.php';
 
+                        <?php
                         $sql = "SELECT * FROM winkel";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr> <td>".$row["winkel_id"]."</td> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
+                                echo "<tr> <th>".$row["winkel_id"]."</th> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
 
@@ -131,6 +130,7 @@
                             <form id="aantalform" method="post" action="aantalwijzigen.php">
                                 <div class="form-group">
                                     <label for="aantalinvoer">Kies een stad</label>
+                                    
                                     <input name="aantalstadinput" class="form-control" type="text" placeholder="winkel" required>
                                 </div>
                                 <div class="form-group">
@@ -142,16 +142,15 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="winkelweergave">
-                        <?php
-                        include 'connectlocal.php';
 
+                        <?php
                         $sql = "SELECT * FROM stad_winkel";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
                             echo "<table class='table'> <thead> <tr> <th scope='col'>aantal_id</th> <th scope='col'>stad_id</th> <th scope='col'>winkel_id</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <th scope='row'>".$row["stad_id"]."</th><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
+                                echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <td scope='row'>".$row["stad_id"]."</td><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
 

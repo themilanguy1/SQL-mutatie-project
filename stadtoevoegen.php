@@ -3,7 +3,7 @@ include 'connectlocal.php';
 
 $stad = ucfirst($_POST['stadnaaminput']);
 $pop = $_POST['stadpopinput'];
-$sql = "INSERT INTO stad (naam, populatie)
+$sql = "INSERT INTO stad (stad_naam, populatie)
 VALUES ('$stad', '$pop')";
 
 if ($conn->query($sql) === TRUE) {
