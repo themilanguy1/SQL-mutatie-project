@@ -51,21 +51,22 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="stadweergave">
-
+                        
                         <?php
-                        $sql = "SELECT * FROM stad";
-                        $result = mysqli_query($conn, $sql);
 
-                        if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
+                            $sql = "SELECT * FROM stad";
+                            $result = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
+                                }
+                                echo "</tbody></table>";
+                                
+                            } else {
+                                echo "Geen resulaten gevonden";
                             }
-                            echo "</tbody></table>";
-                            
-                        } else {
-                            echo "Geen resulaten gevonden";
-                        }
                         ?>
 
                     </div>
@@ -97,19 +98,19 @@
                     <div class="weergavediv" id="winkelweergave">
 
                         <?php
-                        $sql = "SELECT * FROM winkel";
-                        $result = mysqli_query($conn, $sql);
+                            $sql = "SELECT * FROM winkel";
+                            $result = mysqli_query($conn, $sql);
 
-                        if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr> <th>".$row["winkel_id"]."</th> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
+                            if (mysqli_num_rows($result) > 0) {
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr> <th>".$row["winkel_id"]."</th> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
+                                }
+                                echo "</tbody></table>";
+
+                            } else {
+                                echo "Geen resulaten gevonden";
                             }
-                            echo "</tbody></table>";
-
-                        } else {
-                            echo "Geen resulaten gevonden";
-                        }
                         ?>
 
                     </div>
@@ -156,19 +157,19 @@
                     <div class="weergavediv" id="winkelweergave">
 
                         <?php
-                        $sql = "SELECT * FROM stad_winkel";
-                        $result = mysqli_query($conn, $sql);
+                            $sql = "SELECT * FROM stad_winkel";
+                            $result = mysqli_query($conn, $sql);
 
-                        if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>aantal_id</th> <th scope='col'>stad_id</th> <th scope='col'>winkel_id</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
-                            while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <td scope='row'>".$row["stad_id"]."</td><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
+                            if (mysqli_num_rows($result) > 0) {
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>aantal_id</th> <th scope='col'>stad_id</th> <th scope='col'>winkel_id</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                while($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <td scope='row'>".$row["stad_id"]."</td><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
+                                }
+                                echo "</tbody></table>";
+
+                            } else {
+                                echo "Geen resulaten gevonden";
                             }
-                            echo "</tbody></table>";
-
-                        } else {
-                            echo "Geen resulaten gevonden";
-                        }
                         ?>
 
                     </div>
@@ -180,5 +181,10 @@
     <script src="jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="bootstrap.bundle.min.js"></script>
+    <script> 
+        function alertfunction($ding) {
+        alert("Die '$ding' bestaat al in de tabel");
+    }
+    </script>
 </body>
 </html>

@@ -2,28 +2,26 @@
 include 'connectlocal.php';
 
 $stad = ucfirst($_POST['stadnaaminput']);
+$query = mysqli_query($conn, "SELECT stad_naam FROM stad WHERE stad_naam='".$stad."'");
+    if (!$query) {
+        die('Error: ' . mysqli_error($conn));
+    }
 
-var_dump($stad);
-
-$sqlcheck = "SELECT stad_naam FROM stad WHERE EXISTS (SELECT stad_naam FROM stad WHERE stad_naam = '$stad')";
-
-if ($conn->query($sqlcheck) === TRUE) {
-    echo "bestaat";
-} else {
-    echo "bestaat niet";
+if(mysqli_num_rows($query) > 0){
+    echo "stad bestaat al";
+    } else {
+        $pop = $_POST['stadpopinput'];
+        $sql = "INSERT INTO stad (stad_naam, populatie)
+        VALUES ('$stad', '$pop')";
+        
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        
+        $conn->close();
 }
 
-// $pop = $_POST['stadpopinput'];
-// $sql = "INSERT INTO stad (stad_naam, populatie)
-// VALUES ('$stad', '$pop')";
+header('Location: SQLhome.php');
 
-// if ($conn->query($sql) === TRUE) {
-//     echo "New record created successfully";
-// } else {
-//     echo "Error: " . $sql . "<br>" . $conn->error;
-// }
-
-// $conn->close();
-
-
-// header('Location: SQLhome.php');
