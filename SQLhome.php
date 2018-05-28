@@ -36,11 +36,11 @@
                             <h4 id="tit1">Nieuwe stad invoeren:</h4>
                             <form id="stadform" method="POST" action="stadtoevoegen.php">
                                 <div class="form-group">
-                                    <label for="stadinvoer">Vul aub een stadnaam in</label>
+                                    <label for="stadinvoer">Vul een stadnaam in</label>
                                     <input name="stadnaaminput" class="form-control" type="text" placeholder="stad" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="populatieinvoer">Vul aub de populatie van de stad in</label>
+                                    <label for="populatieinvoer">Vul de populatie van de stad in</label>
                                     <input name="stadpopinput" class="form-control" type="number" placeholder="populatie" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
@@ -82,11 +82,11 @@
                         <div class="col-xl-12">
                             <form id="winkelform" method="post" action="winkeltoevoegen.php">
                                 <div class="form-group">
-                                    <label for="aantalinvoer">Vul aub een nieuwe winkel in</label>
+                                    <label for="aantalinvoer">Vul een nieuwe winkel in</label>
                                     <input name="winkelnaaminput" class="form-control" type="text" placeholder="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="winkelinvoer">Vul een afkorting in voor de winkel. <br> Vb: Albert Heijn = ah.</label>
+                                    <label for="winkelinvoer">Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
                                     <input name="winkelafkortinginput" class="form-control" type="text" placeholder="" required>
                                     <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
                                 </div>
@@ -127,15 +127,44 @@
                             <h4 id="tit1">Aantal filialen wijzigen:</h4>
                         </div>
                         <div class="col-xl-12">
-                            <form id="aantalform" method="post" action="aantalwijzigen.php">
+                            <form id="aantalform" method="post" action="aantaltoevoegen.php">
                                 <div class="form-group">
                                     <label for="aantalinvoer">Kies een stad</label>
-                                    
-                                    <input name="aantalstadinput" class="form-control" type="text" placeholder="winkel" required>
+                                    <select name="aantalstadinput" class="form-control" required>
+
+                                        <?php
+                                            $result = $conn->query("SELECT * FROM stad");
+
+                                                while ($row = $result->fetch_assoc()) {
+                                                    unset($stad_id, $stad_naam);
+                                                    $id = $row['stad_id'];
+                                                    $naam = $row['stad_naam']; 
+                                                    echo '<option value="'.$id.'">'.$naam.'</option>';  
+                                            }
+                                        ?>
+
+                                    </select>   
                                 </div>
                                 <div class="form-group">
                                     <label for="aantalinvoer2">Kies een winkel<br></label>
-                                    <input name="aantalwinkelinput" class="form-control" type="text" placeholder="afkorting" required>                                    
+                                    <select name="aantalwinkelinput" class="form-control" required>
+
+                                        <?php
+                                            $result = $conn->query("SELECT * FROM winkel");
+
+                                                while ($row = $result->fetch_assoc()) {
+                                                    unset($winkel_id, $winkel_naam);
+                                                    $id = $row['winkel_id'];
+                                                    $naam = $row['winkel_naam']; 
+                                                    echo '<option value="'.$id.'">'.$naam.'</option>';  
+                                            }
+                                        ?>
+
+                                    </select>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label for="aantalinput">Vul het aantal filialen in</label>
+                                    <input name="aantalnummerinput" class="form-control" type="number" placeholder="" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
