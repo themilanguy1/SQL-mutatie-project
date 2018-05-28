@@ -50,16 +50,16 @@
                         <?php
                         include 'connectlocal.php';
 
-                        $sql = "SELECT stad_id, winkel_id, aantal_filialen FROM stad_winkel";
+                        $sql = "SELECT * FROM stad";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>winkel_id</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                            echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
+                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
-
+                            
                         } else {
                             echo "Geen resulaten gevonden";
                         }
@@ -82,12 +82,12 @@
                         <div class="col-xl-12">
                             <form id="winkelform" method="post" action="winkeltoevoegen.php">
                                 <div class="form-group">
-                                    <label for="winkelinvoer">Vul aub een nieuwe winkel in</label>
-                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
+                                    <label for="aantalinvoer">Vul aub een nieuwe winkel in</label>
+                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="winkelinvoer">Vul een afkorting in voor de winkel. <br> Vb: Albert Heijn = ah.</label>
-                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
+                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="" required>
                                     <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
@@ -98,13 +98,13 @@
                         <?php
                         include 'connectlocal.php';
 
-                        $sql = "SELECT winkel_id, winkel_naam FROM winkel";
+                        $sql = "SELECT * FROM winkel";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                            echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
+                                echo "<tr> <td>".$row["winkel_id"]."</td> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
 
@@ -130,13 +130,12 @@
                         <div class="col-xl-12">
                             <form id="aantalform" method="post" action="aantalwijzigen.php">
                                 <div class="form-group">
-                                    <label for="winkelinvoer">Vul aub een nieuwe winkel in</label>
-                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
+                                    <label for="aantalinvoer">Kies een stad</label>
+                                    <input name="aantalstadinput" class="form-control" type="text" placeholder="winkel" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="winkelinvoer">Vul een afkorting in voor de winkel. <br> Vb: Albert Heijn = ah.</label>
-                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
-                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
+                                    <label for="aantalinvoer2">Kies een winkel<br></label>
+                                    <input name="aantalwinkelinput" class="form-control" type="text" placeholder="afkorting" required>                                    
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
@@ -146,13 +145,13 @@
                         <?php
                         include 'connectlocal.php';
 
-                        $sql = "SELECT winkel_id, winkel_naam FROM winkel";
+                        $sql = "SELECT * FROM stad_winkel";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
-                            echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                            echo "<table class='table'> <thead> <tr> <th scope='col'>aantal_id</th> <th scope='col'>stad_id</th> <th scope='col'>winkel_id</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
+                                echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <th scope='row'>".$row["stad_id"]."</th><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
 

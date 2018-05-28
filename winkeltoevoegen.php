@@ -1,10 +1,10 @@
 <?php
 include 'connectlocal.php';
 
-$winkelid = $_POST['winkelafkortinginput'];
+$winkelafkorting = $_POST['winkelafkortinginput'];
 $winkelnaam = ucfirst($_POST['winkelnaaminput']);
-$sql = "INSERT INTO winkel (winkel_id, winkel_naam)
-VALUES ('$winkelid', '$winkelnaam')";
+$sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
+VALUES ('$winkelafkorting', '$winkelnaam')";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
