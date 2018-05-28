@@ -59,7 +59,7 @@
                                 echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
-                            
+
                         } else {
                             echo "Geen resulaten gevonden";
                         }
@@ -104,7 +104,7 @@
                         if (mysqli_num_rows($result) > 0) {
                             echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id2=".$row["winkel_id"]."'>Delete</td> </tr>";
+                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
                             }
                             echo "</tbody></table>";
 
