@@ -13,13 +13,5 @@ body {
 }
 
 .weergavediv {
-    margin-top: 4em;
-}
-
-table {
-    
-}
-
-.emptyspace {
-    margin-top: 4em;
+    margin: 4em 0em;
 }

@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <h4 id="tit1">Nieuwe stad invoeren:</h4>
-                            <form id="stadform" method="POST" action="stadtoevoegen.php">
+                            <form id="stadform" method="POST" action="addstad.php">
                                 <div class="form-group">
                                     <label for="stadinvoer">Vul een stadnaam in</label>
                                     <input name="stadnaaminput" class="form-control" type="text" placeholder="stad" required>
@@ -66,9 +66,6 @@
                         ?>
 
                     </div>
-                    <div class="emptyspace">
-
-                    </div>
                 </div>
             </div>
         
@@ -80,14 +77,14 @@
                             <h4 id="tit1">Nieuwe winkel invoeren:</h4>
                         </div>
                         <div class="col-xl-12">
-                            <form id="winkelform" method="post" action="winkeltoevoegen.php">
+                            <form id="winkelform" method="post" action="addwinkel.php">
                                 <div class="form-group">
                                     <label for="aantalinvoer">Vul een nieuwe winkel in</label>
-                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="" required>
+                                    <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="winkelinvoer">Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
-                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="" required>
+                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
                                     <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
@@ -113,9 +110,6 @@
                         ?>
 
                     </div>
-                    <div class="emptyspace">
-
-                    </div>
                 </div>
             </div>
 
@@ -127,7 +121,7 @@
                             <h4 id="tit1">Aantal filialen wijzigen:</h4>
                         </div>
                         <div class="col-xl-12">
-                            <form id="aantalform" method="post" action="aantaltoevoegen.php">
+                            <form id="aantalform" method="post" action="addaantal.php">
                                 <div class="form-group">
                                     <label for="aantalinvoer">Kies een stad</label>
                                     <select name="aantalstadinput" class="form-control" required>
@@ -153,7 +147,7 @@
                                             $result = $conn->query("SELECT * FROM winkel");
 
                                                 while ($row = $result->fetch_assoc()) {
-                                                    unset($winkel_id, $winkel_naam);
+                                                    
                                                     $id = $row['winkel_id'];
                                                     $naam = $row['winkel_naam']; 
                                                     echo '<option value="'.$id.'">'.$naam.'</option>';  
@@ -164,7 +158,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="aantalinput">Vul het aantal filialen in</label>
-                                    <input name="aantalnummerinput" class="form-control" type="number" placeholder="" required>
+                                    <input name="aantalnummerinput" class="form-control" type="number" placeholder="aantal" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
@@ -189,9 +183,7 @@
                         ?>
 
                     </div>
-                    <div class="emptyspace">
-
-                    </div>
+                </div>
             </div>
         </div>
     </div>
