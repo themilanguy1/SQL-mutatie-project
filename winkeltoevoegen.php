@@ -15,6 +15,6 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 
 
-header('Location: SQLhome.php#winkelweergave');
+header('Location: SQLhome.php');
 
 ?>

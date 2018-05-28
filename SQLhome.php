@@ -54,11 +54,12 @@
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
+                            echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> </tr> </thead> <tbody>";
-                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td><tr>";
-                                echo "</tbody></table>";
+                                echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
                             }
+                            echo "</tbody></table>";
+                            
                         } else {
                             echo "Geen resulaten gevonden";
                         }
@@ -101,11 +102,12 @@
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
+                            echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                             while($row = mysqli_fetch_assoc($result)) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>winkel id</th> <th scope='col'>winkel naam</th> </tr> </thead> <tbody>";
-                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td><tr>";
-                                echo "</tbody></table>";
+                                echo "<tr><td>".$row["winkel_id"]."</td><td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id2=".$row["winkel_id"]."'>Delete</td> </tr>";
                             }
+                            echo "</tbody></table>";
+
                         } else {
                             echo "Geen resulaten gevonden";
                         }
