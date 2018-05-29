@@ -32,18 +32,18 @@
     
         <!-- Stad tab -->
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="stad" role="tabpanel" aria-labelledby="stad-tab">
+            <div class="tab-pane show active" id="stad" role="tabpanel" aria-labelledby="stad-tab">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
                             <h4 id="tit1">Nieuwe stad invoeren:</h4>
                             <form id="stadform" method="POST" action="addstad.php">
                                 <div class="form-group">
-                                    <label for="stadinvoer">Vul een stadnaam in</label>
+                                    <label>Vul een stadnaam in</label>
                                     <input name="stadnaaminput" class="form-control" type="text" placeholder="stad" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="populatieinvoer">Vul de populatie van de stad in</label>
+                                    <label>Vul de populatie van de stad in</label>
                                     <input name="stadpopinput" class="form-control" type="number" placeholder="populatie" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
@@ -70,7 +70,7 @@
             </div>
         
             <!-- winkel tab -->
-            <div class="tab-pane fade" id="winkel" role="tabpanel" aria-labelledby="winkel-tab">
+            <div class="tab-pane" id="winkel" role="tabpanel" aria-labelledby="winkel-tab">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -79,13 +79,13 @@
                         <div class="col-xl-12">
                             <form id="winkelform" method="post" action="addwinkel.php">
                                 <div class="form-group">
-                                    <label for="aantalinvoer">Vul een nieuwe winkel in</label>
+                                    <label>Vul een nieuwe winkel in</label>
                                     <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="winkelinvoer">Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
+                                    <label>Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
                                     <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
-                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting mag max 2 karakters zijn.</small>
+                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting moet 2 karakters zijn.</small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
@@ -111,7 +111,7 @@
             </div>
 
             <!-- aantal tab -->
-            <div class="tab-pane fade" id="aantal" role="tabpanel" aria-labelledby="aantal-tab">
+            <div class="tab-pane" id="aantal" role="tabpanel" aria-labelledby="aantal-tab">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
@@ -120,19 +120,19 @@
                         <div class="col-xl-12">
                             <form id="aantalform" method="post" action="addaantal.php">
                                 <div class="form-group">
-                                    <label for="aantalinvoer">Kies een stad</label>
+                                    <label>Kies een stad</label>
                                     <select name="aantalstadinput" class="form-control" required>
                                         <?php dropdownmenu ("stad", "stad_id", "stad_naam"); ?>
                                     </select>   
                                 </div>
                                 <div class="form-group">
-                                    <label for="aantalinvoer2">Kies een winkel<br></label>
+                                    <label>Kies een winkel<br></label>
                                     <select name="aantalwinkelinput" class="form-control" required>
                                         <?php dropdownmenu ("winkel", "winkel_id", "winkel_naam"); ?>                                         
                                     </select>                                    
                                 </div>
                                 <div class="form-group">
-                                    <label for="aantalinput">Vul het aantal filialen in</label>
+                                    <label>Vul het aantal filialen in</label>
                                     <input name="aantalnummerinput" class="form-control" type="number" placeholder="aantal" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
