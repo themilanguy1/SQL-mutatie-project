@@ -6,7 +6,6 @@ $query = mysqli_query($conn, "SELECT stad_naam FROM stad WHERE stad_naam='".$sta
     if (!$query) {
         die('Error: ' . mysqli_error($conn));
     }
-
 if(mysqli_num_rows($query) > 0){
     } else {
         $pop = $_POST['stadpopinput'];

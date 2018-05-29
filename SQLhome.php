@@ -51,9 +51,7 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="stadweergave">
-                        
                         <?php
-
                             $sql = "SELECT * FROM stad";
                             $result = mysqli_query($conn, $sql);
 
@@ -63,12 +61,10 @@
                                     echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a href='deletestad.php?id=".$row["stad_id"]."'>Delete</td> </tr>";
                                 }
                                 echo "</tbody></table>";
-                                
                             } else {
                                 echo "Geen resulaten gevonden";
                             }
                         ?>
-
                     </div>
                 </div>
             </div>
@@ -96,7 +92,6 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="winkelweergave">
-
                         <?php
                             $sql = "SELECT * FROM winkel";
                             $result = mysqli_query($conn, $sql);
@@ -107,12 +102,10 @@
                                     echo "<tr> <th>".$row["winkel_id"]."</th> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a href='deletewinkel.php?id=".$row["winkel_id"]."'>Delete</td> </tr>";
                                 }
                                 echo "</tbody></table>";
-
                             } else {
                                 echo "Geen resulaten gevonden";
                             }
                         ?>
-
                     </div>
                 </div>
             </div>
@@ -129,21 +122,13 @@
                                 <div class="form-group">
                                     <label for="aantalinvoer">Kies een stad</label>
                                     <select name="aantalstadinput" class="form-control" required>
-
-                                        <?php
-                                            dropdownmenu ("stad", "stad_id", "stad_naam");
-                                        ?>
-
+                                        <?php dropdownmenu ("stad", "stad_id", "stad_naam"); ?>
                                     </select>   
                                 </div>
                                 <div class="form-group">
                                     <label for="aantalinvoer2">Kies een winkel<br></label>
                                     <select name="aantalwinkelinput" class="form-control" required>
-
-                                        <?php
-                                            dropdownmenu ("winkel", "winkel_id", "winkel_naam");
-                                        ?>
-
+                                        <?php dropdownmenu ("winkel", "winkel_id", "winkel_naam"); ?>                                         
                                     </select>                                    
                                 </div>
                                 <div class="form-group">
@@ -155,7 +140,6 @@
                         </div>
                     </div>
                     <div class="weergavediv" id="winkelweergave">
-
                         <?php
                             $sql = "SELECT * FROM stad_winkel";
                             $result = mysqli_query($conn, $sql);
@@ -166,12 +150,10 @@
                                     echo "<tr><th scope='row'>".$row["aantal_id"]."</th> <td scope='row'>".$row["stad_id"]."</td><td>".$row["winkel_id"]."</td><td>".$row["aantal_filialen"]."</td> <td><a href='deleteaantal.php?id=".$row["aantal_id"]."'>Delete</td> </tr>";
                                 }
                                 echo "</tbody></table>";
-
                             } else {
                                 echo "Geen resulaten gevonden";
                             }
                         ?>
-
                     </div>
                 </div>
             </div>
