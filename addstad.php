@@ -8,7 +8,7 @@ $query = mysqli_query($conn, "SELECT stad_naam FROM stad WHERE stad_naam='".$sta
     }
 
 if(mysqli_num_rows($query) > 0){
-    echo "stad bestaat al";
+    
     } else {
         $pop = $_POST['stadpopinput'];
         $sql = "INSERT INTO stad (stad_naam, populatie)

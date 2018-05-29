@@ -183,7 +183,7 @@
     <script src="bootstrap.bundle.min.js"></script>
     <script> 
         function alertfunction($ding) {
-        alert("Die '$ding' bestaat al in de tabel");
+        alert("Die".$ding."bestaat al in de tabel");
     }
     </script>
 </body>
