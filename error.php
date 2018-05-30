@@ -10,22 +10,24 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-xl-12 text-center">
+        <div class="row  text-center">
+            <div class="col-xl-12">
                 <h4 id="tit1">Foutmelding: </h4>
 
                 <?php
                     if(ISSET($_GET['error'])) {
                         $error = $_GET['error'];
-                    
-                        echo "Deze $error bestaat al.";
+                        echo "Deze $error bestaat al";
                     }
-                   
                 ?>
 
             </div>
-            <div class="col-xl-12" text center>
-                
+            <div class="col-xl-12">
+                <a class="knoppie" href="SQLhome.php">
+                    <button class="btn btn-primary">
+                        Terug naar home
+                    </button>
+                </a>
             </div>    
         </div>
     </div>

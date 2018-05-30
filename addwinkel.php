@@ -8,7 +8,7 @@ $query = mysqli_query($conn, "SELECT winkel_naam FROM winkel WHERE winkel_naam='
     }
 
 if(mysqli_num_rows($query) > 0){
-    echo "winkel bestaat al";
+    header('Location: error.php?error=winkel');
     } else {
         $winkelafkorting = $_POST['winkelafkortinginput'];
         $sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
@@ -21,7 +21,8 @@ if(mysqli_num_rows($query) > 0){
         }
         
         $conn->close();
+        header('Location: SQLhome.php');
 }
 
-header('Location: SQLhome.php');
+
 

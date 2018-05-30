@@ -8,6 +8,7 @@ $query = mysqli_query($conn, "SELECT stad_id, winkel_afkorting FROM stad_winkel 
         die('Error: ' . mysqli_error($conn));
     }
 if(mysqli_num_rows($query) > 0){
+    header('Location: error.php?error=filialen');
     } else {
         $aantal = $_POST['aantalnummerinput'];
         $sql = "INSERT INTO stad_winkel (stad_id, winkel_afkorting, aantal_filialen)
@@ -20,5 +21,5 @@ if(mysqli_num_rows($query) > 0){
         }
         
         $conn->close();
+        header('Location: SQLhome.php');
 }
-header('Location: SQLhome.php');
