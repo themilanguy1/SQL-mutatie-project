@@ -7,6 +7,7 @@ $query = mysqli_query($conn, "SELECT stad_naam FROM stad WHERE stad_naam='".$sta
         die('Error: ' . mysqli_error($conn));
     }
 if(mysqli_num_rows($query) > 0){
+    header('Location: error.php?error=stad');
     } else {
         $pop = $_POST['stadpopinput'];
         $sql = "INSERT INTO stad (stad_naam, populatie)
@@ -19,7 +20,8 @@ if(mysqli_num_rows($query) > 0){
         }
         
         $conn->close();
+        header('Location: SQLhome.php');
 }
 
-header('Location: SQLhome.php');
+
 
