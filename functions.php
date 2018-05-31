@@ -10,6 +10,3 @@ function dropdownmenu ($tabel, $idinput, $naaminput) {
         echo '<option value="'.$id.'">'.$naam.'</option>';  
     }
 }
-
-
-
