@@ -19,3 +19,8 @@ body {
 .knoppie {
     margin-top: 2em;
 }
+
+#basimage {
+    height: 15px;
+    width: 15px;
+}
