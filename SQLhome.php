@@ -57,7 +57,7 @@
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a class='fas fa-trash-alt' href='deletestad.php?id=".$row["stad_id"]."'></td> </tr>";
                                 }
@@ -146,7 +146,7 @@
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad_id</th> <th scope='col'>winkel_afkorting</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>aantal filialen</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr> <th scope='row'>".$row["stad_id"]."</th><th>".$row["winkel_afkorting"]."</th><td>".$row["aantal_filialen"]."</td> <td><a class='fas fa-trash-alt' href='deleteaantal.php?id=".$row["aantal_id"]."'></td> </tr>";
                                 }
