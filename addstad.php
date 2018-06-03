@@ -1,5 +1,5 @@
 <?php
-include 'connectlocal.php';
+include 'connect.php';
 
 $stad = ucfirst($_POST['stadnaaminput']);
 $query = mysqli_query($conn, "SELECT stad_naam FROM stad WHERE stad_naam='".$stad."'");

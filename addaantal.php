@@ -1,5 +1,5 @@
 <?php
-include 'connectlocal.php';
+include 'connect.php';
 
 $stad = $_POST['aantalstadinput'];
 $winkel = $_POST['aantalwinkelinput'];

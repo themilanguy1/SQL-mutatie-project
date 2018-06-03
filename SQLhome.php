@@ -1,5 +1,5 @@
 <?php 
-    include 'connectlocal.php'; 
+    include 'connect.php'; 
     include 'functions.php';
 ?>
 
@@ -57,9 +57,9 @@
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Edit</th> <th scope='col'>Delete</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletestad.php?id=".$row["stad_id"]."'></td> </tr>";
+                                    echo "<tr><th scope='row'>".$row["stad_id"]."</th><td>".$row["stad_naam"]."</td><td>".$row["populatie"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editstad.php?id=".$row["stad_id"]."'> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletestad.php?id=".$row["stad_id"]."'></td> </tr>";
                                 }
                                 echo "</tbody></table>";
                             } else {
@@ -158,31 +158,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="errorpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
         </div>
     </div>
     <!-- javascript -->

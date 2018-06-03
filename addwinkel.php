@@ -1,5 +1,5 @@
 <?php
-include 'connectlocal.php';
+include 'connect.php';
 
 $winkelnaam = ucfirst($_POST['winkelnaaminput']);
 $query = mysqli_query($conn, "SELECT winkel_naam FROM winkel WHERE winkel_naam='".$winkelnaam."'");
