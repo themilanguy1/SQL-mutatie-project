@@ -57,9 +57,9 @@
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Wijzig</th> <th scope='col'>Verwijder</th> </tr> </thead> <tbody>";
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad</th> <th scope='col'>populatie</th> <th scope='col'>Wijzig</th> <th scope='col'>Verwijder</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr> <th scope='row'>".$row["stad_id"]."</th> <td>".$row["stad_naam"]."</td> <td>".$row["populatie"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editstad.php?id=".$row["stad_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletestad.php?id=".$row["stad_id"]."'></a></td> </tr>";
+                                    echo "<tr> <td>".$row["stad_naam"]."</td> <td>".$row["populatie"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editstad.php?id=".$row["stad_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletestad.php?id=".$row["stad_id"]."'></a></td> </tr>";
                                 }
                                 echo "</tbody></table>";
                             } else {
@@ -100,7 +100,7 @@
                             if (mysqli_num_rows($result) > 0) {
                                 echo "<table class='table'> <thead> <tr> <th scope='col'>winkel afkorting</th> <th scope='col'>winkel naam</th> <th scope='col'>Wijzig</th> <th scope='col'>Verwijder</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr> <th>".$row["winkel_afkorting"]."</th> <td>".$row["winkel_naam"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editwinkel.php?id=".$row["winkel_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletewinkel.php?id=".$row["winkel_id"]."'></a></td> </tr>";
+                                    echo "<tr> <td>".$row["winkel_afkorting"]."</td> <td>".$row["winkel_naam"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editwinkel.php?id=".$row["winkel_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deletewinkel.php?id=".$row["winkel_id"]."'></a></td> </tr>";
                                 }
                                 echo "</tbody></table>";
                             } else {
@@ -142,13 +142,16 @@
                     </div>
                     <div class="weergavediv" id="winkelweergave">
                         <?php
-                            $sql = "SELECT * FROM stad_winkel";
+                            $sql = "SELECT *, stad_winkel.winkel_afkorting, stad.stad_naam, winkel.winkel_naam 
+                            FROM ((stad_winkel 
+                            INNER JOIN stad ON stad_winkel.stad_id = stad.stad_id)
+                            INNER JOIN winkel ON stad_winkel.winkel_afkorting = winkel.winkel_afkorting)";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
-                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad id</th> <th scope='col'>winkel afkorting</th> <th scope='col'>aantal filialen</th> <th scope='col'>Wijzig</th> <th scope='col'>Verwijder</th> </tr> </thead> <tbody>";
+                                echo "<table class='table'> <thead> <tr> <th scope='col'>stad</th> <th scope='col'>winkel</th> <th scope='col'>aantal filialen</th> <th scope='col'>Wijzig</th> <th scope='col'>Verwijder</th> </tr> </thead> <tbody>";
                                 while($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr> <th scope='row'>".$row["stad_id"]."</th><th>".$row["winkel_afkorting"]."</th><td>".$row["aantal_filialen"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editaantal.php?id=".$row["aantal_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deleteaantal.php?id=".$row["aantal_id"]."'></a></td> </tr>";
+                                    echo "<tr> <td scope='row'>".$row["stad_naam"]."</td><td>".$row["winkel_naam"]."</td><td>".$row["aantal_filialen"]."</td> <td><a style='font-size: 25px;' class='fas fa-edit' href='editaantal.php?id=".$row["aantal_id"]."'></a></td> <td><a style='font-size: 25px;' class='fas fa-trash-alt' href='deleteaantal.php?id=".$row["aantal_id"]."'></a></td> </tr>";
                                 }
                                 echo "</tbody></table>";
                             } else {
