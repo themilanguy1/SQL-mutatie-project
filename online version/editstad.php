@@ -5,10 +5,6 @@ include 'functions.php';
 if(ISSET($_GET['id'])) {
     //define id for use
     $id = $_GET['id'];
-
-    //select placeholder data for update form
-    $sql = "SELECT * FROM stad WHERE stad_id = ". $id. "";
-    $result = mysqli_query($conn, $sql);
 } else {
     //send to home if get is not set
     header("Location: SQLhome.php");  
@@ -29,7 +25,9 @@ if(ISSET($_GET['id'])) {
                 <form id="editstadform" method="POST" action="">
                     <div class="form-group">
                         <label>Wijzig de stadnaam</label>
-                        <input name="stadnaaminput" class="form-control" type="text" placeholder="<?php 
+                        <input name="stadnaaminput2" class="form-control" type="text" value="<?php 
+                                $sql = "SELECT * FROM stad WHERE stad_id = ". $id. "";
+                                $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) { 
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo $row['stad_naam']; 
@@ -39,9 +37,9 @@ if(ISSET($_GET['id'])) {
                     </div>
                     <div class="form-group">
                         <label>Wijzig de populatie van de stad</label>
-                        <input name="stadpopinput" class="form-control" type="number" placeholder="<?php 
-                                
-                                //for some reason this doesnt work quite yet
+                        <input name="stadpopinput2" class="form-control" type="number" value="<?php 
+                                $sql = "SELECT * FROM stad WHERE stad_id = ". $id. "";
+                                $result = mysqli_query($conn, $sql);
                                 if (mysqli_num_rows($result) > 0) { 
                                     while($row = mysqli_fetch_assoc($result)) {
                                         echo $row['populatie']; 
@@ -50,6 +48,7 @@ if(ISSET($_GET['id'])) {
                             ?>" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Wijziging bevestigen</button>
+                    <a href="SQLhome.php"><button type="button" class="btn btn-primary">Annuleren</button></a>
                 </form>
             </div>
         </div>
@@ -58,16 +57,18 @@ if(ISSET($_GET['id'])) {
 </html>
 
 <?php
-// if(ISSET($_GET['id'])) {
-//     $id = $_GET['id'];
-
-//     $sql = "UPDATE stad SET stad_naam, populatie='$stadnaam', '$populatie' WHERE id=" . $id. ";
-
-//     if ($conn->query($sql) === TRUE) {
-//         echo "Record updated successfully";
-//     } else {
-//         echo "Error updating record: " . $conn->error;
-//     }
+    if(isset($_POST['stadnaaminput2'])) {
+        $stadnaam = ucfirst($_POST['stadnaaminput2']);
+        $populatie = $_POST['stadpopinput2'];
+        $sql = "UPDATE stad 
+                SET stad_naam = '$stadnaam', 
+                populatie= '$populatie' 
+                WHERE stad_id=$id";
     
-//     $conn->close();
-// }
+        if ($conn->query($sql) === TRUE) {
+        } else {
+        }
+        
+        $conn->close();
+        header('location: SQLhome.php');
+    }
