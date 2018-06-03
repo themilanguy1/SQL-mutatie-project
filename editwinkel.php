@@ -22,7 +22,7 @@ if(ISSET($_GET['id'])) {
         <div class="row">
             <div class="col-xl-12">
                 <h4 id="tit1">Winkel/afkorting wijzigen:</h4>
-                <form id="editwinkelform" method="POST" action="">
+                <form id="editwinkelform" method="POST" action="SQLhome.php">
                     <div class="form-group">
                         <label>Wijzig de winkelnaam</label>
                         <input name="winkelnaaminput2" class="form-control" type="text" value="<?php 
@@ -55,20 +55,3 @@ if(ISSET($_GET['id'])) {
     </div>
 </body>
 </html>
-
-<?php
-    if(isset($_POST['winkelnaaminput2'])) {
-        $winkelnaam = ucfirst($_POST['winkelnaaminput2']);
-        $winkelafkorting = $_POST['winkelafkortinginput2'];
-        $sql = "UPDATE winkel 
-                SET winkel_naam = '$winkelnaam', 
-                winkel_afkorting= '$winkelafkorting' 
-                WHERE winkel_id=$id";
-    
-        if ($conn->query($sql) === TRUE) {
-        } else {
-        }
-        
-        $conn->close();
-        header('location: SQLhome.php');
-    }

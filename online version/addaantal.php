@@ -15,9 +15,7 @@ if(mysqli_num_rows($query) > 0){
         VALUES ('$stad', '$winkel', '$aantal')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
         }
         
         $conn->close();
