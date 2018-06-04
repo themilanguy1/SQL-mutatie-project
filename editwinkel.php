@@ -7,7 +7,9 @@ if(ISSET($_GET['id'])) {
     $id = $_GET['id'];
 } else {
     //send to home if get is not set
-    header("Location: SQLhome.php");  
+    echo '<script type="text/javascript">';
+    echo 'window.location.href="SQLhome.php";';
+    echo '</script>';  
 }
 ?>
 

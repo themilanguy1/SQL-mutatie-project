@@ -13,7 +13,9 @@ if(isset($_POST['stadnaaminput'])) {
         }
     //check of stad al bestaat
     if(mysqli_num_rows($query) > 0){
-        header('Location: error.php?error=stad');
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="error.php?error=stad";';
+        echo '</script>';
         } else {
             $pop = $_POST['stadpopinput'];
             //alternatief voor AI bij database
@@ -46,7 +48,10 @@ if(isset($_POST['winkelnaaminput'])) {
         }
     //check of winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        header('Location: error.php?error=winkel');
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="error.php?error=winkel";';
+        echo '</script>';
+        
         } else {
             $winkelafkorting = $_POST['winkelafkortinginput'];
             $sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
@@ -72,7 +77,9 @@ if(isset($_POST['aantalstadinput'])) {
         }
     //check of connectie tussen stad en winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        header('Location: error.php?error=filialen');
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="error.php?error=aantal";';
+        echo '</script>';
         } else {
             $aantal = $_POST['aantalnummerinput'];
             $sql = "INSERT INTO stad_winkel (stad_id, winkel_afkorting, aantal_filialen)
@@ -152,15 +159,19 @@ if(isset($_POST['aantalstadinput'])) {
 //stad verwijderen
 if(isset($_GET['delete_stad_id'])) {
     mysqli_query($conn,"DELETE FROM `stad` WHERE stad_id = " . $_GET["delete_stad_id"]);
-    header('location: SQLhome.php');
+    echo '<script type="text/javascript">';
+    echo 'window.location.href="SQLhome.php";';
+    echo '</script>';   
 }
 ?>
 
 <?php
 //winkel verwijderen
 if(isset($_GET['delete_winkel_id'])) {
-    mysqli_query($conn,"DELETE FROM `winkel` WHERE winkel_id = " . $_GET["delete_winkel_id"]);\
-    header('location: SQLhome.php');
+    mysqli_query($conn,"DELETE FROM `winkel` WHERE winkel_id = " . $_GET["delete_winkel_id"]);
+    echo '<script type="text/javascript">';
+    echo 'window.location.href="SQLhome.php";';
+    echo '</script>';
 }
 ?>
 
@@ -168,7 +179,9 @@ if(isset($_GET['delete_winkel_id'])) {
 //aantal filialen verwijderen
 if(isset($_GET['delete_aantal_id'])) {
     mysqli_query($conn,"DELETE FROM `stad_winkel` WHERE aantal_id = " . $_GET["delete_aantal_id"]);
-    header('location: SQLhome.php');
+    echo '<script type="text/javascript">';
+    echo 'window.location.href="SQLhome.php";';
+    echo '</script>';
 }
 ?>
 

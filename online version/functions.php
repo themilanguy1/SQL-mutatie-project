@@ -9,8 +9,3 @@ function dropdownmenu($tabel, $idinput, $naaminput) {
         echo '<option value="'.$id.'">'.$naam.'</option>';  
     }
 }
-
-// function placeholder($table, $column, $id) {
-//     include 'connect.php';
-//     $result = $conn->query("SELECT $column FROM $table WHERE $table."_id = ");
-// }
