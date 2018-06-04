@@ -22,7 +22,7 @@ if(ISSET($_GET['id'])) {
         <div class="row">
             <div class="col-xl-12">
                 <h4 id="tit1">Winkel/afkorting wijzigen:</h4>
-                <form id="editwinkelform" method="POST" action="SQLhome.php">
+                <form id="editwinkelform" method="POST" action="SQLhome.php?aantal_update_id=<?php echo $id; ?>">
                     <div class="form-group">
                         <label>Wijzig het aantal filialen van <?php 
                         $sql = "SELECT stad_winkel.winkel_afkorting, stad.stad_naam, winkel.winkel_naam 

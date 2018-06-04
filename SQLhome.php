@@ -28,9 +28,9 @@ if(isset($_POST['stadnaaminput'])) {
             VALUES ('$stad_id', '$stad', '$pop')";
             
             if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
+                echo "";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "";
             }
     }
 }
@@ -53,9 +53,9 @@ if(isset($_POST['winkelnaaminput'])) {
             VALUES ('$winkelafkorting', '$winkelnaam')";
             
             if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
+                echo "";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "";
             }
     }
 }
@@ -79,9 +79,9 @@ if(isset($_POST['aantalstadinput'])) {
             VALUES ('$stad', '$winkel', '$aantal')";
     
             if ($conn->query($sql) === TRUE) {
-                echo "New record created successfully";
+                echo "";
             } else {
-                echo "Error: " . $sql . "<br>" . $conn->error;
+                echo "";
             }
     }
 }
@@ -101,14 +101,18 @@ if(isset($_POST['aantalstadinput'])) {
                 populatie= '$populatie' 
                 WHERE stad_id=$stad_update_id";
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "";
         }
     }
 ?>
-winkel_update_id
+
 <?php
+    if(ISSET($_GET['winkel_update_id'])) {
+        //define id for use
+        $winkel_update_id = $_GET['winkel_update_id'];
+    }
     //wijzig winkel
     if(isset($_POST['winkelnaaminput2'])) {
         $winkelnaam = ucfirst($_POST['winkelnaaminput2']);
@@ -116,26 +120,30 @@ winkel_update_id
         $sql = "UPDATE winkel 
                 SET winkel_naam = '$winkelnaam', 
                 winkel_afkorting= '$winkelafkorting' 
-                WHERE winkel_id=$winkel_update_id";
+                WHERE winkel_id= '$winkel_update_id'";
     
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "";
         }
     }
 ?>
 
 <?php
+    if(ISSET($_GET['aantal_update_id'])) {
+        //define id for use
+        $aantal_update_id = $_GET['aantal_update_id'];
+    }
     if(isset($_POST['aantalnummerinput2'])) {
         $aantal = ucfirst($_POST['aantalnummerinput2']);
         $sql = "UPDATE stad_winkel 
                 SET aantal_filialen = '$aantal'
-                WHERE aantal_id=$id";
+                WHERE aantal_id='$aantal_update_id'";
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
+            echo "";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "";
         }
     }
 ?>
