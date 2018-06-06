@@ -31,7 +31,8 @@ if(ISSET($_GET['id'])) {
                                 FROM ((stad_winkel 
                                 INNER JOIN stad ON stad_winkel.stad_id = stad.stad_id)
                                 INNER JOIN winkel ON stad_winkel.winkel_afkorting = winkel.winkel_afkorting)
-                                WHERE aantal_id = ". $id. "";
+                                WHERE aantal_id = $id
+                                ORDER BY stad_naam";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) { 
                             while($row = mysqli_fetch_assoc($result)) {

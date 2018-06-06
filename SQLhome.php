@@ -38,6 +38,7 @@ if(isset($_POST['stadnaaminput'])) {
 
 <?php
 //winkelinvoer
+//strtoupper en substr gebruiken voor automatische afkorting
 if(isset($_POST['winkelnaaminput'])) {
     $winkelnaam = ucfirst($_POST['winkelnaaminput']);
     $query = mysqli_query($conn, "SELECT winkel_naam FROM winkel WHERE winkel_naam='".$winkelnaam."'");
@@ -48,7 +49,8 @@ if(isset($_POST['winkelnaaminput'])) {
     if(mysqli_num_rows($query) > 0){
         redirect("error.php?error=winkel");
         } else {
-            $winkelafkorting = $_POST['winkelafkortinginput'];
+            $winkelafk1 = substr($winkelnaam, 0, 2);
+            $winkelafkorting = strtoupper($winkelafk1);
             $sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
             VALUES ('$winkelafkorting', '$winkelnaam')";
             
@@ -254,11 +256,6 @@ if(isset($_GET['delete_aantal_id'])) {
                                 <div class="form-group">
                                     <label>Vul een nieuwe winkel in</label>
                                     <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
-                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
-                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting moet 2 karakters zijn.</small>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>

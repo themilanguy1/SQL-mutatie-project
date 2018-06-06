@@ -13,9 +13,7 @@ if(isset($_POST['stadnaaminput'])) {
         }
     //check of stad al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=stad";';
-        echo '</script>';
+        redirect("error.php?error=stad");
         } else {
             $pop = $_POST['stadpopinput'];
             //alternatief voor AI bij database
@@ -40,6 +38,7 @@ if(isset($_POST['stadnaaminput'])) {
 
 <?php
 //winkelinvoer
+//strtoupper en substr gebruiken voor automatische afkorting
 if(isset($_POST['winkelnaaminput'])) {
     $winkelnaam = ucfirst($_POST['winkelnaaminput']);
     $query = mysqli_query($conn, "SELECT winkel_naam FROM winkel WHERE winkel_naam='".$winkelnaam."'");
@@ -48,12 +47,10 @@ if(isset($_POST['winkelnaaminput'])) {
         }
     //check of winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=winkel";';
-        echo '</script>';
-        
+        redirect("error.php?error=winkel");
         } else {
-            $winkelafkorting = $_POST['winkelafkortinginput'];
+            $winkelafk1 = substr($winkelnaam, 0, 2);
+            $winkelafkorting = strtoupper($winkelafk1);
             $sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
             VALUES ('$winkelafkorting', '$winkelnaam')";
             
@@ -77,9 +74,7 @@ if(isset($_POST['aantalstadinput'])) {
         }
     //check of connectie tussen stad en winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=aantal";';
-        echo '</script>';
+        redirect("error.php?error=aantal");
         } else {
             $aantal = $_POST['aantalnummerinput'];
             $sql = "INSERT INTO stad_winkel (stad_id, winkel_afkorting, aantal_filialen)
@@ -159,9 +154,7 @@ if(isset($_POST['aantalstadinput'])) {
 //stad verwijderen
 if(isset($_GET['delete_stad_id'])) {
     mysqli_query($conn,"DELETE FROM `stad` WHERE stad_id = " . $_GET["delete_stad_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';   
+    redirect("SQLhome.php");   
 }
 ?>
 
@@ -169,9 +162,7 @@ if(isset($_GET['delete_stad_id'])) {
 //winkel verwijderen
 if(isset($_GET['delete_winkel_id'])) {
     mysqli_query($conn,"DELETE FROM `winkel` WHERE winkel_id = " . $_GET["delete_winkel_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';
+    redirect("SQLhome.php"); 
 }
 ?>
 
@@ -179,9 +170,7 @@ if(isset($_GET['delete_winkel_id'])) {
 //aantal filialen verwijderen
 if(isset($_GET['delete_aantal_id'])) {
     mysqli_query($conn,"DELETE FROM `stad_winkel` WHERE aantal_id = " . $_GET["delete_aantal_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';
+    redirect("SQLhome.php"); 
 }
 ?>
 
@@ -212,7 +201,7 @@ if(isset($_GET['delete_aantal_id'])) {
             <a class="nav-link" id="winkel-tab" data-toggle="tab" href="#winkel" role="tab" aria-controls="winkel" aria-selected="false">Winkel</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" id="aantal-tab" data-toggle="tab" href="#aantal" role="tab" aria-controls="aantal" aria-selected="false">Aantal</a>
+            <a class="nav-link" id="filialen-tab" data-toggle="tab" href="#filialen" role="tab" aria-controls="filialen" aria-selected="false">Filialen</a>
             </li>
         </ul>
     
@@ -238,7 +227,7 @@ if(isset($_GET['delete_aantal_id'])) {
                     </div>
                     <div class="weergavediv" id="stadweergave">
                         <?php
-                            $sql = "SELECT * FROM stad";
+                            $sql = "SELECT * FROM stad ORDER BY stad_naam";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -268,18 +257,13 @@ if(isset($_GET['delete_aantal_id'])) {
                                     <label>Vul een nieuwe winkel in</label>
                                     <input name="winkelnaaminput" class="form-control" type="text" placeholder="winkel" required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Vul een afkorting in voor de winkel<br>Vb: Albert Heijn = ah</label>
-                                    <input name="winkelafkortinginput" class="form-control" type="text" placeholder="afkorting" required>
-                                    <small id="winkelnotice" class="form-text text-muted">Let op: afkorting moet 2 karakters zijn.</small>
-                                </div>
                                 <button type="submit" class="btn btn-primary">Invoeren</button>
                             </form>
                         </div>
                     </div>
                     <div class="weergavediv" id="winkelweergave">
                         <?php
-                            $sql = "SELECT * FROM winkel";
+                            $sql = "SELECT * FROM winkel ORDER BY winkel_naam";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -297,24 +281,24 @@ if(isset($_GET['delete_aantal_id'])) {
             </div>
 
             <!-- aantal tab -->
-            <div class="tab-pane" id="aantal" role="tabpanel" aria-labelledby="aantal-tab">
+            <div class="tab-pane" id="filialen" role="tabpanel" aria-labelledby="filialen-tab">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
-                            <h4 id="tit1">Aantal filialen wijzigen:</h4>
+                            <h4 id="tit1">Filialen wijzigen:</h4>
                         </div>
                         <div class="col-xl-12">
                             <form id="aantalform" method="post" action="">
                                 <div class="form-group">
                                     <label>Kies een stad</label>
                                     <select name="aantalstadinput" class="form-control" required>
-                                        <?php dropdownmenu ("stad", "stad_id", "stad_naam"); ?>
+                                        <?php dropdownmenu ("stad", "stad_id", "stad_naam", "stad_id"); ?>
                                     </select>   
                                 </div>
                                 <div class="form-group">
                                     <label>Kies een winkel<br></label>
                                     <select name="aantalwinkelinput" class="form-control" required>
-                                        <?php dropdownmenu ("winkel", "winkel_afkorting", "winkel_naam"); ?>                                         
+                                        <?php dropdownmenu ("winkel", "winkel_afkorting", "winkel_naam", "winkel_id"); ?>                                         
                                     </select>                                    
                                 </div>
                                 <div class="form-group">
