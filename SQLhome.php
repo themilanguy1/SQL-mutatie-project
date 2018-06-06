@@ -238,7 +238,7 @@ if(isset($_GET['delete_aantal_id'])) {
                     </div>
                     <div class="weergavediv" id="stadweergave">
                         <?php
-                            $sql = "SELECT * FROM stad";
+                            $sql = "SELECT * FROM stad ORDER BY stad_naam";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -279,7 +279,7 @@ if(isset($_GET['delete_aantal_id'])) {
                     </div>
                     <div class="weergavediv" id="winkelweergave">
                         <?php
-                            $sql = "SELECT * FROM winkel";
+                            $sql = "SELECT * FROM winkel ORDER BY winkel_naam";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -308,13 +308,13 @@ if(isset($_GET['delete_aantal_id'])) {
                                 <div class="form-group">
                                     <label>Kies een stad</label>
                                     <select name="aantalstadinput" class="form-control" required>
-                                        <?php dropdownmenu ("stad", "stad_id", "stad_naam"); ?>
+                                        <?php dropdownmenu ("stad", "stad_id", "stad_naam", "stad_id"); ?>
                                     </select>   
                                 </div>
                                 <div class="form-group">
                                     <label>Kies een winkel<br></label>
                                     <select name="aantalwinkelinput" class="form-control" required>
-                                        <?php dropdownmenu ("winkel", "winkel_afkorting", "winkel_naam"); ?>                                         
+                                        <?php dropdownmenu ("winkel", "winkel_afkorting", "winkel_naam", "winkel_id"); ?>                                         
                                     </select>                                    
                                 </div>
                                 <div class="form-group">
@@ -352,5 +352,16 @@ if(isset($_GET['delete_aantal_id'])) {
     <script src="jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="bootstrap.bundle.min.js"></script>
+    <script>
+    var hash = document.location.hash;
+var prefix = "tab_";
+if (hash) {
+    $('.nav-tabs a[href="'+hash.replace(prefix,"")+'"]').tab('show');
+} 
+
+// Change hash for page-reload
+$('.nav-tabs a').on('shown', function (e) {
+    window.location.hash = e.target.hash.replace("#", "#" + prefix);
+});
 </body>
 </html>
