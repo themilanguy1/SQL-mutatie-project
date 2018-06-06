@@ -13,9 +13,7 @@ if(isset($_POST['stadnaaminput'])) {
         }
     //check of stad al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=stad";';
-        echo '</script>';
+        redirect("error.php?error=stad");
         } else {
             $pop = $_POST['stadpopinput'];
             //alternatief voor AI bij database
@@ -48,10 +46,7 @@ if(isset($_POST['winkelnaaminput'])) {
         }
     //check of winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=winkel";';
-        echo '</script>';
-        
+        redirect("error.php?error=winkel");
         } else {
             $winkelafkorting = $_POST['winkelafkortinginput'];
             $sql = "INSERT INTO winkel (winkel_afkorting, winkel_naam)
@@ -77,9 +72,7 @@ if(isset($_POST['aantalstadinput'])) {
         }
     //check of connectie tussen stad en winkel al bestaat
     if(mysqli_num_rows($query) > 0){
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="error.php?error=aantal";';
-        echo '</script>';
+        redirect("error.php?error=aantal");
         } else {
             $aantal = $_POST['aantalnummerinput'];
             $sql = "INSERT INTO stad_winkel (stad_id, winkel_afkorting, aantal_filialen)
@@ -159,9 +152,7 @@ if(isset($_POST['aantalstadinput'])) {
 //stad verwijderen
 if(isset($_GET['delete_stad_id'])) {
     mysqli_query($conn,"DELETE FROM `stad` WHERE stad_id = " . $_GET["delete_stad_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';   
+    redirect("SQLhome.php");   
 }
 ?>
 
@@ -169,9 +160,7 @@ if(isset($_GET['delete_stad_id'])) {
 //winkel verwijderen
 if(isset($_GET['delete_winkel_id'])) {
     mysqli_query($conn,"DELETE FROM `winkel` WHERE winkel_id = " . $_GET["delete_winkel_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';
+    redirect("SQLhome.php"); 
 }
 ?>
 
@@ -179,9 +168,7 @@ if(isset($_GET['delete_winkel_id'])) {
 //aantal filialen verwijderen
 if(isset($_GET['delete_aantal_id'])) {
     mysqli_query($conn,"DELETE FROM `stad_winkel` WHERE aantal_id = " . $_GET["delete_aantal_id"]);
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="SQLhome.php";';
-    echo '</script>';
+    redirect("SQLhome.php"); 
 }
 ?>
 
@@ -212,7 +199,7 @@ if(isset($_GET['delete_aantal_id'])) {
             <a class="nav-link" id="winkel-tab" data-toggle="tab" href="#winkel" role="tab" aria-controls="winkel" aria-selected="false">Winkel</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" id="aantal-tab" data-toggle="tab" href="#aantal" role="tab" aria-controls="aantal" aria-selected="false">Aantal</a>
+            <a class="nav-link" id="filialen-tab" data-toggle="tab" href="#filialen" role="tab" aria-controls="filialen" aria-selected="false">Filialen</a>
             </li>
         </ul>
     
@@ -297,11 +284,11 @@ if(isset($_GET['delete_aantal_id'])) {
             </div>
 
             <!-- aantal tab -->
-            <div class="tab-pane" id="aantal" role="tabpanel" aria-labelledby="aantal-tab">
+            <div class="tab-pane" id="filialen" role="tabpanel" aria-labelledby="filialen-tab">
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-12">
-                            <h4 id="tit1">Aantal filialen wijzigen:</h4>
+                            <h4 id="tit1">Filialen wijzigen:</h4>
                         </div>
                         <div class="col-xl-12">
                             <form id="aantalform" method="post" action="">
@@ -352,16 +339,5 @@ if(isset($_GET['delete_aantal_id'])) {
     <script src="jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="bootstrap.bundle.min.js"></script>
-    <script>
-    var hash = document.location.hash;
-var prefix = "tab_";
-if (hash) {
-    $('.nav-tabs a[href="'+hash.replace(prefix,"")+'"]').tab('show');
-} 
-
-// Change hash for page-reload
-$('.nav-tabs a').on('shown', function (e) {
-    window.location.hash = e.target.hash.replace("#", "#" + prefix);
-});
 </body>
 </html>

@@ -9,3 +9,9 @@ function dropdownmenu($tabel, $idinput, $naaminput, $order) {
         echo '<option value="'.$id.'">'.$naam.'</option>';  
     }
 }
+
+function redirect($link) {
+    echo '<script type="text/javascript">';
+    echo 'window.location.href='.$link.';';
+    echo '</script>';   
+}
